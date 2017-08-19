@@ -26,23 +26,73 @@
         </md-truncate>
       </div>
     </md-toolbar>
-    <md-content>
-      <div layout="row">
-        <div layout="column" flex="25">
-          <md-card  md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
-            <md-card-title>
-              <md-card-title-text>
-                <span class="md-headline">Card with image</span>
-                <span class="md-subhead">Large</span>
-              </md-card-title-text>
-            </md-card-title>
-            <md-card-actions layout="row" layout-align="end center">
-              <md-button>Action 1</md-button>
-            </md-card-actions>
-          </md-card>
+
+    <div ng-controller="BoardCtrl">
+      <md-content>
+        <div layout="row">
+          <div layout="column" flex="25">
+            <md-card>
+              <md-card-title>
+                <md-card-title-text>
+                  <span class="md-headline">Happy</span>
+                </md-card-title-text>
+              </md-card-title>
+
+              <md-card-content>
+                <md-list flex>
+                  <md-list-item class="md-1-line" ng-repeat="item in todos" ng-click="null">
+                    <div class="md-list-item-text" layout="column">
+                      <h3>{{ item.title }}</h3>
+                    </div>
+                  </md-list-item>
+                </md-list>
+              </md-card-content>
+
+              <md-card-actions layout="row" layout-align="end center">
+                <md-button>Action 1</md-button>
+              </md-card-actions>
+            </md-card>
+          </div>
+        </div>
+      </md-content>
+
+      <md-button ng-click="showNewBoardDialog($event);" class="md-fab md-primary md-fab-bottom-right"  aria-label="New Board" >
+        <md-icon>add</md-icon>
+      </md-button>
+
+      <div style="visibility: hidden">
+        <div class="md-dialog-container" id="newBoardDialog">
+          <md-dialog flex="40" aria-label="New Board">
+            <md-toolbar>
+              <div class="md-toolbar-tools">
+                <h2>New Board</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel();">
+                  <md-icon aria-label="Close Dialog">close</md-icon>
+                </md-button>
+              </div>
+            </md-toolbar>
+            <md-dialog-content>
+              <div class="md-dialog-content">
+                <form layout-align="bottom" layout-padding>
+                  <div layout="row">
+                    <md-input-container flex class="md-icon-float md-block md-title">
+                      <label>Board</label>
+                      <input ng-model="newBoard.name" type="text">
+                    </md-input-container>
+                    <div>
+                      <md-button ng-click="submit()" class="md-primary md-raised">
+                        <md-icon>add</md-icon>
+                      </md-button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </md-dialog-content>
+          </md-dialog>
         </div>
       </div>
-    </md-content>
+    </div>
   </div>
 </body>
 

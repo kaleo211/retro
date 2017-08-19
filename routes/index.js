@@ -16,6 +16,12 @@ router.get('/board', function(req, res) {
   });
 });
 
+router.post('/board', function(req, res) {
+  controllers.board.post(req.body).then(function(board) {
+    res.status(200).send(JSON.stringify(board));
+  });
+});
+
 router.post('/board/item', function (req, res) {
   var body = req.body;
   controllers.transaction.add(

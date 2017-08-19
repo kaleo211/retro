@@ -1,5 +1,7 @@
+"use strict";
+
 module.exports = function (sequelize, DataTypes) {
-  return sequelize.define('item', {
+  var Item = sequelize.define('Item', {
     id: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -10,4 +12,14 @@ module.exports = function (sequelize, DataTypes) {
     column: DataTypes.STRING,
     checked: DataTypes.BOOLEAN
   });
+
+  Item.associate = function (models) {
+    Item.belongsTo(models.Board, {
+      foreignKey: {
+        allowNull: false
+      }
+    });
+  };
+
+  return Item;
 };

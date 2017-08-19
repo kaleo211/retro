@@ -1,5 +1,5 @@
 {
-  "name": "beulah",
+  "name": "retro",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -13,7 +13,6 @@
     "angular-animate": "^1.6.5",
     "angular-aria": "^1.6.5",
     "angular-material": "^1.1.4",
-    "angular-material-data-table": "^0.10.10",
     "angular-messages": "^1.6.5",
     "angular-route": "^1.6.5",
     "body-parser": "^1.17.1",

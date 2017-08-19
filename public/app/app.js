@@ -5,16 +5,12 @@ var app = angular.module('app', [
   'board'
 ]);
 
-app.controller('AppCtrl', function ($scope, $mdDialog, $window) {
+app.controller('AppCtrl', function ($scope, $mdDialog) {
   angular.element(document).ready(function () {
   });
 
   $scope.cancel = function () {
     $mdDialog.cancel();
-  };
-
-  $scope.reload = function () {
-    $window.location.reload();
   };
 });
 
