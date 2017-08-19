@@ -5,7 +5,6 @@
   <meta charset="utf-8">
   <link rel="stylesheet" href="/scripts/material-design-icons/iconfont/material-icons.css">
   <link rel="stylesheet" href="/scripts/angular-material/angular-material.min.css">
-  <link rel="stylesheet" href="/css/md-data-table.min.css">
   <link rel="stylesheet" href="/css/application.css">
 
   <script src="/scripts/angular/angular.min.js"></script>
@@ -14,10 +13,8 @@
   <script src="/scripts/angular-aria/angular-aria.min.js"></script>
   <script src="/scripts/angular-messages/angular-messages.min.js"></script>
   <script src="/scripts/angular-material/angular-material.min.js"></script>
-  <script src="/js/md-data-table.min.js"></script>
   <script src="/app/app.js"></script>
-  <script src="/app/controllers/TransactionCtrl.js"></script>
-  <script src="/app/controllers/SummaryCtrl.js"></script>
+  <script src="/app/controllers/BoardCtrl.js"></script>
 </head>
 
 <body ng-app="app" layout="row">
@@ -44,69 +41,8 @@
             </md-card-actions>
           </md-card>
         </div>
-        <div layout="column" flex=25>
-          <md-card  md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
-            <md-card-title>
-              <md-card-title-text>
-                <span class="md-headline">Card with image</span>
-                <span class="md-subhead">Large</span>
-              </md-card-title-text>
-            </md-card-title>
-            <md-card-actions layout="row" layout-align="end center">
-              <md-button>Action 1</md-button>
-            </md-card-actions>
-          </md-card>
-        </div>
       </div>
     </md-content>
-
-    <div ng-controller="TransactionAddCtrl">
-      <md-fab-speed-dial class="md-fab-bottom-right" md-open="showSpeedDial" md-direction="up" ng-class="'md-scale'">
-        <md-fab-trigger>
-          <md-button aria-label="menu" class="md-fab md-primary">
-            <md-icon>add</md-icon>
-          </md-button>
-        </md-fab-trigger>
-        <md-fab-actions>
-          <md-button ng-click="showAddTransactionDialog($event, 'expense')" aria-label="expense" class="md-fab md-raised md-mini md-primary">
-            <md-icon>sentiment_very_satisfied</md-icon>
-          </md-button>
-          <md-button ng-click="showAddTransactionDialog($event, 'transfer')" aria-label="transfer" class="md-fab md-raised md-mini md-primary">
-            <md-icon>sentiment_neutral</md-icon>
-          </md-button>
-          <md-button ng-click="showAddTransactionDialog($event, 'transfer')" aria-label="transfer" class="md-fab md-raised md-mini md-primary">
-            <md-icon>sentiment_very_dissatisfied</md-icon>
-          </md-button>
-        </md-fab-actions>
-      </md-fab-speed-dial>
-
-      <div style="visibility: hidden">
-        <div class="md-dialog-container" id="newTransferDialog">
-          <md-dialog aria-label="New Transfer" style="width:40em; height:30em;">
-            <form ng-cloak>
-              <md-toolbar>
-                <div class="md-toolbar-tools">
-                  <h2>New Transfer</h2>
-                  <span flex></span>
-                  <md-button class="md-icon-button" ng-click="cancel();init();">
-                    <md-icon aria-label="Close dialog">close</md-icon>
-                  </md-button>
-                </div>
-              </md-toolbar>
-              <md-dialog-content>
-                <div class="md-dialog-content">
-                </div>
-              </md-dialog-content>
-              <md-dialog-actions layout="row">
-                <span flex></span>
-                <md-button ng-click="submit()" class="md-primary md-raised">confirm</md-button>
-                <span flex="5"></span>
-              </md-dialog-actions>
-            </form>
-          </md-dialog>
-        </div>
-      </div>
-    </div>
   </div>
 </body>
 

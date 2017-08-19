@@ -10,45 +10,18 @@ router.get('/', function (req, res) {
   res.status(200).render('index');
 });
 
-router.get('/summary', function(req, res){
-  controllers.summary.get().then(function(debts) {
-    res.status(200).send(JSON.stringify(debts));
+router.get('/board', function(req, res) {
+  controllers.board.get().then(function(boards) {
+    res.status(200).send(JSON.stringify(boards));
   });
 });
 
-router.get('/members', function(req, res) {
-  controllers.member.get().then(function(members) {
-    res.status(200).send(JSON.stringify(members));
-  });
-});
-
-router.get('/transactions', function(req, res) {
-  controllers.transaction
-      .search({order: {field:'date',order:'desc'}})
-      .then(transactions => {
-        res.status(200).send(JSON.stringify(transactions));
-      });
-});
-
-router.post('/transactions/search', function(req, res) {
+router.post('/board/item', function (req, res) {
   var body = req.body;
-  console.log('body', body);
-  controllers.transaction.search(body).then(transactions => {
-    res.status(200).send(JSON.stringify(transactions));
-  })
-});
-
-router.post('/transactions', function (req, res) {
-  var body = req.body;
-  console.log("body", body);
   controllers.transaction.add(
-    body.from,
-    body.to,
-    body.total,
-    body.date,
-    body.memo,
     body.type,
-    body.category
+    body.title,
+    body.total
   ).then(function (transaction) {
     res.status(200).json(transaction);
   });

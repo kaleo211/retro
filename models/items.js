@@ -6,7 +6,7 @@ module.exports = function (sequelize, DataTypes) {
       primaryKey: true,
       autoIncrement: true
     },
-    value: DataTypes.STRING,
+    title: DataTypes.STRING,
     column: DataTypes.STRING,
     checked: DataTypes.BOOLEAN
   });

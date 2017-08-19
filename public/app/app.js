@@ -1,10 +1,8 @@
 var app = angular.module('app', [
-  'md.data.table',
   'ngRoute',
   'ngMaterial',
   'ngMessages',
-  'transaction',
-  'summary'
+  'board'
 ]);
 
 app.controller('AppCtrl', function ($scope, $mdDialog, $window) {
