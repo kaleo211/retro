@@ -1,9 +1,17 @@
 angular.module('board', [])
   .controller('BoardCtrl', function BoardCtrl($scope, $http, $mdToast, $mdDialog) {
-    var init = function () {
-      $http.get('/board').then(function (resp) {
+    $scope.board = null;
+
+    init = function () {
+      $http.get('/board').then(resp => {
         $scope.boards = resp.data;
-        console.log($scope.boards);
+        $scope.board = resp.data[0];
+
+        url = '/board/' + $scope.board.id + '/item';
+        $http.get(url).then(resp => {
+          $scope.items = resp.data;
+          console.log("items: ", $scope.items.happy);
+        });
       });
     };
 
@@ -13,6 +21,27 @@ angular.module('board', [])
 
     init();
 
+    $scope.addItem = function (item) {
+      $http.post('/board/item', item).then(
+        resp => {
+          $scope.items = resp.data;
+          toast('SUCCEEDED TO ADD ITEM!');
+          $mdDialog.cancel();
+        },
+        resp => {
+          toast('FAILED TO ADD ITEM!');
+        });
+    };
+
+    $scope.addHappyItem = function (chip) {
+      var item = {
+        title: chip,
+        column: 'happy',
+        BoardId: $scope.board.id
+      };
+      $scope.addItem(item);
+      return item;
+    };
 
     $scope.showNewBoardDialog = function (ev) {
       $mdDialog.show({
@@ -34,13 +63,13 @@ angular.module('board', [])
 
     $scope.submit = function () {
       $http.post('/board', $scope.newBoard).then(
-        function(resp) {
+        resp => {
           $scope.board = resp.data;
-          toast('SUCCEEDED TO ADD!');
+          toast('SUCCEEDED TO ADD BOARD!');
           $mdDialog.cancel();
         },
-        function(resp) {
-          toast('FAILED TO ADD!')
+        resp => {
+          toast('FAILED TO ADD BOARD!')
         }
       );
     };

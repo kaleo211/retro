@@ -3,16 +3,45 @@ var models = require('../models');
 
 var item = {};
 
-item.get = function () {
-  return models.Item.findAll().then(function(items) {
-    return items.map(function(m) {
-      return m.get({plain: true});
+var get = function (boardID, column) {
+  return models.Item.findAll({
+    where: {
+      BoardId: boardID,
+      column: column
+    },
+    order: [['createdAt', 'ASC']]
+  }).then(items => {
+    return items.map(function (m) {
+      return m.get({ plain: true });
     });
   });
 };
 
-item.post = function () {
+var getAll = function (boardID) {
+  return Promise.all([
+    get(boardID, 'happy'),
+    get(boardID, 'med'),
+    get(boardID, 'sad'),
+    get(boardID, 'action')
+  ]).then(([happy, med, sad, action]) => {
+    var items = {};
+    items['happy'] = happy;
+    items['med'] = med;
+    items['sad'] = sad;
+    items['action'] = action;
+    return items;
+  });
+};
 
-}
+item.get = function (boardID) {
+  return getAll(boardID);
+};
+
+item.post = function (item) {
+  return models.Item.create(item).then(item => {
+    console.log('items')
+    return getAll(item.BoardId);
+  });
+};
 
 module.exports = item;

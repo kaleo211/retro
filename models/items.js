@@ -10,7 +10,8 @@ module.exports = function (sequelize, DataTypes) {
     },
     title: DataTypes.STRING,
     column: DataTypes.STRING,
-    checked: DataTypes.BOOLEAN
+    checked: DataTypes.BOOLEAN,
+    createdAt: DataTypes.DATE
   });
 
   Item.associate = function (models) {

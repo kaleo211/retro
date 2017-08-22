@@ -6,6 +6,7 @@ module.exports = function (sequelize, DataTypes) {
       primaryKey: true,
       autoIncrement: true
     },
+    createdAt: DataTypes.DATE,
     name: DataTypes.STRING
   });
 };

@@ -2,34 +2,35 @@ var router = require('express').Router();
 var models = require('../models');
 var controllers = require('../controllers');
 
-router.use(function (req, res, next) {
+router.use((req, res, next) => {
   next();
 });
 
-router.get('/', function (req, res) {
+router.get('/', (req, res) => {
   res.status(200).render('index');
 });
 
-router.get('/board', function(req, res) {
-  controllers.board.get().then(function(boards) {
-    res.status(200).send(JSON.stringify(boards));
+router.get('/board', (req, res) => {
+  controllers.board.get().then(boards => {
+    res.status(200).json(boards);
   });
 });
 
-router.post('/board', function(req, res) {
-  controllers.board.post(req.body).then(function(board) {
-    res.status(200).send(JSON.stringify(board));
+router.get('/board/:boardID/item', (req, res) => {
+  controllers.item.get(req.params.boardID).then(items => {
+    res.status(200).json(items);
   });
 });
 
-router.post('/board/item', function (req, res) {
-  var body = req.body;
-  controllers.transaction.add(
-    body.type,
-    body.title,
-    body.total
-  ).then(function (transaction) {
-    res.status(200).json(transaction);
+router.post('/board', (req, res) => {
+  controllers.board.post(req.body).then(board => {
+    res.status(200).json(board);
+  });
+});
+
+router.post('/board/item', (req, res) => {
+  controllers.item.post(req.body).then(items => {
+    res.status(200).json(items);
   });
 });
 
