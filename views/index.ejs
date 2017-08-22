@@ -38,7 +38,7 @@
                 </md-card-title-text>
               </md-card-title>
               <md-card-content>
-                <md-chips ng-model="items.happy" md-transform-chip="addHappyItem($chip)" >
+                <md-chips ng-model="items.happy" md-transform-chip="addItem($chip, 'happy')" md-on-remove="deleteItem($chip.id)">
                   <md-chip-template >
                     <strong >{{$chip.title}}</strong>
                   </md-chip-template>

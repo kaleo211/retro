@@ -21,26 +21,31 @@ angular.module('board', [])
 
     init();
 
-    $scope.addItem = function (item) {
+    $scope.addItem = function (chip, column) {
+      var item = {
+        title: chip,
+        column: column,
+        BoardId: $scope.board.id
+      };
+
       $http.post('/board/item', item).then(
         resp => {
           $scope.items = resp.data;
           toast('SUCCEEDED TO ADD ITEM!');
-          $mdDialog.cancel();
         },
         resp => {
           toast('FAILED TO ADD ITEM!');
         });
     };
 
-    $scope.addHappyItem = function (chip) {
-      var item = {
-        title: chip,
-        column: 'happy',
-        BoardId: $scope.board.id
-      };
-      $scope.addItem(item);
-      return item;
+    $scope.deleteItem = function (id) {
+      $http.delete('/item/' + id).then(
+        resp => {
+          toast('SUCCEEDED TO DELETE ITEM!');
+        },
+        resp => {
+          toast('FAILED TO DELETE ITEM!');
+        });
     };
 
     $scope.showNewBoardDialog = function (ev) {

@@ -37,9 +37,18 @@ item.get = function (boardID) {
   return getAll(boardID);
 };
 
+item.delete = function (id) {
+  return models.Item.destroy({
+    where: {
+      id: id
+    }
+  }).then(resp => {
+    return resp;
+  });
+};
+
 item.post = function (item) {
   return models.Item.create(item).then(item => {
-    console.log('items')
     return getAll(item.BoardId);
   });
 };

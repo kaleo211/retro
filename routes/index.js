@@ -10,14 +10,20 @@ router.get('/', (req, res) => {
   res.status(200).render('index');
 });
 
+router.delete('/item/:id', (req, res) => {
+  controllers.item.delete(req.params.id).then(resp => {
+    res.status(202);
+  });
+});
+
 router.get('/board', (req, res) => {
   controllers.board.get().then(boards => {
     res.status(200).json(boards);
   });
 });
 
-router.get('/board/:boardID/item', (req, res) => {
-  controllers.item.get(req.params.boardID).then(items => {
+router.get('/board/:id/item', (req, res) => {
+  controllers.item.get(req.params.id).then(items => {
     res.status(200).json(items);
   });
 });
