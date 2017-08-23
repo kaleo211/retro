@@ -34,6 +34,7 @@ angular.module('board', [])
       $http.post('/board/item', item).then(
         resp => {
           $scope.items = resp.data;
+          $scope.title = "";
           toast('SUCCEEDED TO ADD ITEM!');
         },
         resp => {

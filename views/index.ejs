@@ -39,6 +39,12 @@
               </md-card-title>
               <md-card-content>
                 <md-list>
+                  <form  name="newItem" ng-submit="addItem(title, 'happy')">
+                    <md-input-container class="md-block">
+                      <label>New Item</label>
+                      <input flex="100" ng-model="title">
+                    </md-input-container>
+                  </form>
                   <md-list-item ng-repeat="item in items.happy">
                     <strong>{{ item.title }}</strong>
                     <md-menu class="md-secondary">
