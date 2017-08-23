@@ -10,9 +10,9 @@ router.get('/', (req, res) => {
   res.status(200).render('index');
 });
 
-router.delete('/item/:id', (req, res) => {
-  controllers.item.delete(req.params.id).then(resp => {
-    res.status(202);
+router.delete('/board/:boardID/item/:itemID', (req, res) => {
+  controllers.item.delete(req.params.boardID, req.params.itemID).then(items => {
+    res.status(200).json(items);
   });
 });
 

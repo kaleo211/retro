@@ -37,13 +37,13 @@ item.get = function (boardID) {
   return getAll(boardID);
 };
 
-item.delete = function (id) {
+item.delete = function (boardID, itemID) {
   return models.Item.destroy({
     where: {
-      id: id
+      id: itemID
     }
   }).then(resp => {
-    return resp;
+    return getAll(boardID);
   });
 };
 

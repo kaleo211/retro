@@ -1,17 +1,20 @@
 angular.module('board', [])
-  .controller('BoardCtrl', function BoardCtrl($scope, $http, $mdToast, $mdDialog) {
+  .controller('BoardCtrl', function BoardCtrl($scope, $http, $mdToast, $mdDialog, $route) {
     $scope.board = null;
+
+    var getItems = function () {
+      url = '/board/' + $scope.board.id + '/item';
+      $http.get(url).then(resp => {
+        $scope.items = resp.data;
+        console.log("items: ", $scope.items.happy);
+      });
+    };
 
     init = function () {
       $http.get('/board').then(resp => {
         $scope.boards = resp.data;
         $scope.board = resp.data[0];
-
-        url = '/board/' + $scope.board.id + '/item';
-        $http.get(url).then(resp => {
-          $scope.items = resp.data;
-          console.log("items: ", $scope.items.happy);
-        });
+        getItems();
       });
     };
 
@@ -39,8 +42,10 @@ angular.module('board', [])
     };
 
     $scope.deleteItem = function (id) {
-      $http.delete('/item/' + id).then(
+      var url = '/board/' + $scope.board.id + '/item/' + id;
+      $http.delete(url).then(
         resp => {
+          $scope.items = resp.data;
           toast('SUCCEEDED TO DELETE ITEM!');
         },
         resp => {
