@@ -16,6 +16,12 @@ router.delete('/board/:boardID/item/:itemID', (req, res) => {
   });
 });
 
+router.put('/board/:boardID/item/:itemID', (req, res) => {
+  controllers.item.put(req.params.boardID, req.params.itemID).then(items => {
+    res.status(200).json(items);
+  });
+});
+
 router.get('/board', (req, res) => {
   controllers.board.get().then(boards => {
     res.status(200).json(boards);

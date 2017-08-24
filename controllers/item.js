@@ -47,6 +47,15 @@ item.delete = function (boardID, itemID) {
   });
 };
 
+item.put = function (boardID, itemID) {
+  return models.Item.update(
+    {checked: true},
+    {where: {id: itemID}}
+  ).then(resp => {
+    return getAll(boardID);
+  });
+};
+
 item.post = function (item) {
   return models.Item.create(item).then(item => {
     return getAll(item.BoardId);

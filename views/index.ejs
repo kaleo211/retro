@@ -39,14 +39,14 @@
               </md-card-title>
               <md-card-content>
                 <md-list>
-                  <form  name="newItem" ng-submit="addItem(title, 'happy')">
+                  <form name="newItem" ng-submit="addItem(title, 'happy')">
                     <md-input-container class="md-block">
                       <label>New Item</label>
                       <input flex="100" ng-model="title">
                     </md-input-container>
                   </form>
                   <md-list-item ng-repeat="item in items.happy">
-                    <strong>{{ item.title }}</strong>
+                    <span ng-class="item.checked ? 'strikethrough' : ''">{{ item.title }}</span>
                     <md-menu class="md-secondary">
                       <md-button class="md-icon-button">
                         <md-icon>more_horiz</md-icon>
@@ -55,7 +55,7 @@
                         <md-button md-menu-item ng-click="">
                           <md-icon>plus_one</md-icon>
                         </md-button>
-                        <md-button md-menu-item ng-click="">
+                        <md-button md-menu-item ng-click="checkItem(item.id)">
                           <md-icon md-menu-align-target>check</md-icon>
                         </md-button>
                         <md-button md-menu-item ng-click="deleteItem(item.id)">

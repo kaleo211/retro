@@ -42,6 +42,18 @@ angular.module('board', [])
         });
     };
 
+    $scope.checkItem = function (id) {
+      var url = '/board/' + $scope.board.id + '/item/' + id;
+      $http.put(url).then(
+        resp => {
+          $scope.items = resp.data;
+          toast('SUCCEEDED TO UPDATE ITEM!');
+        },
+        resp => {
+          toast('FAILED TO UPDATE ITEM!');
+        });
+    };
+
     $scope.deleteItem = function (id) {
       var url = '/board/' + $scope.board.id + '/item/' + id;
       $http.delete(url).then(
