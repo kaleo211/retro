@@ -47,11 +47,11 @@
                   </form>
                   <md-list-item ng-repeat="item in items.happy">
                     <span ng-class="item.checked ? 'strikethrough' : ''">{{ item.title }}</span>
-                    <md-menu ng-if="!item.checked" class="md-secondary">
+                    <md-menu ng-hide="item.checked" class="md-secondary">
                       <md-button class="md-icon-button">
                         <md-icon>more_horiz</md-icon>
                       </md-button>
-                      <md-menu-content width="1">
+                      <md-menu-content ng-hide="item.checked" width="1">
                         <md-button md-menu-item ng-click="">
                           <md-icon>plus_one</md-icon>
                         </md-button>
