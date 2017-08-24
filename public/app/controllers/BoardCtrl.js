@@ -6,7 +6,6 @@ angular.module('board', [])
       url = '/board/' + $scope.board.id + '/item';
       $http.get(url).then(resp => {
         $scope.items = resp.data;
-        console.log("items: ", $scope.items.happy);
       });
     };
 
@@ -24,9 +23,9 @@ angular.module('board', [])
 
     init();
 
-    $scope.addItem = function (chip, column) {
+    $scope.addItem = function (title, column) {
       var item = {
-        title: chip,
+        title: title,
         column: column,
         BoardId: $scope.board.id
       };

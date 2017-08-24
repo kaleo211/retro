@@ -7,15 +7,15 @@ board.get = function () {
   return models.Board.findAll({
     order: [['createdAt', 'DESC']]
   }).then(boards => {
-    return boards.map(function(m) {
-      return m.get({plain: true});
+    return boards.map(function (m) {
+      return m.get({ plain: true });
     });
   });
 };
 
 board.post = function (board) {
   return models.Board.create(board).then(board => {
-    return board.get({plain: true});
+    return board.get({ plain: true });
   });
 };
 
