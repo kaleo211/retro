@@ -9,7 +9,7 @@ var get = function (boardID, column) {
       BoardId: boardID,
       column: column
     },
-    order: [['createdAt', 'ASC']]
+    order: [['plus', 'DESC'], ['createdAt', 'ASC']]
   }).then(items => {
     return items.map(function (m) {
       return m.get({ plain: true });
@@ -47,9 +47,11 @@ item.delete = function (boardID, itemID) {
   });
 };
 
-item.put = function (boardID, itemID) {
+item.put = function (boardID, itemID, item) {
+  console.log("itemID: ", itemID);
+  console.log("item: ", item);
   return models.Item.update(
-    { checked: true },
+    item,
     { where: { id: itemID } }
   ).then(resp => {
     return getAll(boardID);

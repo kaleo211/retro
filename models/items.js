@@ -10,7 +10,8 @@ module.exports = function (sequelize, DataTypes) {
     },
     title: DataTypes.STRING,
     column: DataTypes.STRING,
-    checked: DataTypes.BOOLEAN,
+    done: DataTypes.BOOLEAN,
+    plus: DataTypes.INTEGER,
     createdAt: DataTypes.DATE
   });
 

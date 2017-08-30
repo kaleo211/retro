@@ -25,8 +25,8 @@ angular.module('board', [])
       });
     };
 
-    $scope.updateBoard = function() {
-      if ($scope.board!=null) {
+    $scope.updateBoard = function () {
+      if ($scope.board != null) {
         localStorageService.set('board', $scope.board);
         getItems();
         return $scope.board.name;
@@ -44,7 +44,8 @@ angular.module('board', [])
       var item = {
         title: title,
         column: column,
-        BoardId: $scope.board.id
+        BoardId: $scope.board.id,
+        plus: 1
       };
 
       $http.post('/board/item', item).then(
@@ -58,17 +59,22 @@ angular.module('board', [])
         });
     };
 
-    $scope.checkItem = function (id) {
-      var url = '/board/' + $scope.board.id + '/item/' + id;
-      $http.put(url).then(
-        resp => {
-          $scope.items = resp.data;
-          toast('SUCCEEDED TO UPDATE ITEM!');
-        },
-        resp => {
-          toast('FAILED TO UPDATE ITEM!');
-        });
+    var updateItem = function (item) {
+      var url = '/board/' + $scope.board.id + '/item/' + item.id;
+      $http.put(url, item).then(resp => {
+        $scope.items = resp.data;
+      })
     };
+
+    $scope.crossItem = function (item) {
+      item.done = true;
+      updateItem(item);
+    }
+
+    $scope.plusOne = function (item) {
+      item.plus += 1;
+      updateItem(item);
+    }
 
     $scope.deleteItem = function (id) {
       var url = '/board/' + $scope.board.id + '/item/' + id;

@@ -55,16 +55,16 @@
                     </md-input-container>
                   </form>
                   <md-list-item ng-repeat="item in items.happy">
-                    <span ng-class="item.checked ? 'strikethrough' : ''">{{ item.title }}</span>
-                    <md-menu ng-hide="item.checked" class="md-secondary">
+                    <span ng-class="item.done ? 'strikethrough' : ''">{{ item.title }}</span>
+                    <md-menu ng-hide="item.done" class="md-secondary">
                       <md-button class="md-icon-button">
                         <md-icon>more_horiz</md-icon>
                       </md-button>
-                      <md-menu-content ng-hide="item.checked" width="1">
-                        <md-button md-menu-item ng-click="">
+                      <md-menu-content ng-hide="item.done" width="1">
+                        <md-button md-menu-item ng-click="plusOne(item)">
                           <md-icon>plus_one</md-icon>
                         </md-button>
-                        <md-button md-menu-item ng-click="checkItem(item.id)">
+                        <md-button md-menu-item ng-click="crossItem(item)">
                           <md-icon md-menu-align-target>check</md-icon>
                         </md-button>
                         <md-button md-menu-item ng-click="deleteItem(item.id)">
