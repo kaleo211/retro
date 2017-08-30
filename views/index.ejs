@@ -13,21 +13,30 @@
   <script src="/scripts/angular-aria/angular-aria.min.js"></script>
   <script src="/scripts/angular-messages/angular-messages.min.js"></script>
   <script src="/scripts/angular-material/angular-material.min.js"></script>
+  <script src="/scripts/angular-local-storage/dist/angular-local-storage.min.js"></script>
   <script src="/app/app.js"></script>
   <script src="/app/controllers/BoardCtrl.js"></script>
 </head>
 
 <body ng-app="app" layout="row">
   <div ng-controller="AppCtrl" layout="column" layout-fill>
-    <md-toolbar>
-      <div class="md-toolbar-tools">
-        <md-truncate>
-          <a href="" ng-click="reload()">DOJO Retro</a>
-        </md-truncate>
-      </div>
-    </md-toolbar>
-
     <div ng-controller="BoardCtrl">
+      <md-toolbar>
+        <div class="md-toolbar-tools">
+          <md-truncate>
+            <a href="" ng-click="reload()">DOJO Retro</a>
+          </md-truncate>
+          <span flex></span>
+          <md-input-container>
+            <md-select ng-model="board" md-selected-text="updateBoard()">
+              <md-optgroup label="Boards">
+                <md-option ng-value="b" ng-repeat="b in boards">{{b.name}}</md-option>
+              </md-optgroup>
+            </md-select>
+          </md-input-container>
+        </div>
+      </md-toolbar>
+
       <md-content>
         <div layout="row">
           <div layout="column" flex="25">

@@ -1,6 +1,8 @@
 angular.module('board', [])
-  .controller('BoardCtrl', function BoardCtrl($scope, $http, $mdToast, $mdDialog, $route) {
-    $scope.board = null;
+  .controller('BoardCtrl', function ($scope, $http, $mdToast, $mdDialog, $route, localStorageService) {
+    if (!localStorageService.isSupported) {
+      console.log('local storage is not supported by this browser!')
+    }
 
     var getItems = function () {
       url = '/board/' + $scope.board.id + '/item';
@@ -12,9 +14,24 @@ angular.module('board', [])
     init = function () {
       $http.get('/board').then(resp => {
         $scope.boards = resp.data;
-        $scope.board = resp.data[0];
+        if (localStorageService.get('board') == null) {
+          if ($scope.boards.length > 0) {
+            localStorageService.set('board', $scope.boards[0]);
+          }
+        }
+        $scope.board = localStorageService.get('board');
+
         getItems();
       });
+    };
+
+    $scope.updateBoard = function() {
+      if ($scope.board!=null) {
+        localStorageService.set('board', $scope.board);
+        getItems();
+        return $scope.board.name;
+      }
+      return "";
     };
 
     $scope.$on("updateBoard", function () {
