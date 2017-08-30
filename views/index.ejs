@@ -46,35 +46,36 @@
                   <span class="md-headline">Happy</span>
                 </md-card-title-text>
               </md-card-title>
-              <md-card-content>
-                <md-list>
+              <md-list>
+                <md-card-content>
                   <form name="newItem" ng-submit="addItem(title, 'happy')">
                     <md-input-container class="md-block">
                       <label>New Item</label>
                       <input flex="100" ng-model="title">
                     </md-input-container>
                   </form>
-                  <md-list-item ng-repeat="item in items.happy">
-                    <span ng-class="item.done ? 'strikethrough' : ''">{{ item.title }}</span>
-                    <md-menu ng-hide="item.done" class="md-secondary">
-                      <md-button class="md-icon-button">
-                        <md-icon>more_horiz</md-icon>
+                </md-card-content>
+                <md-list-item ng-repeat="item in items.happy">
+                  <span>{{ item.plus }}&nbsp;&nbsp;</span>
+                  <span ng-class="item.done ? 'strikethrough' : ''">{{ item.title }}</span>
+                  <md-menu ng-hide="item.done" class="md-secondary">
+                    <md-button class="md-icon-button">
+                      <md-icon>more_horiz</md-icon>
+                    </md-button>
+                    <md-menu-content ng-hide="item.done" width="1">
+                      <md-button md-menu-item ng-click="plusOne(item)">
+                        <md-icon>plus_one</md-icon>
                       </md-button>
-                      <md-menu-content ng-hide="item.done" width="1">
-                        <md-button md-menu-item ng-click="plusOne(item)">
-                          <md-icon>plus_one</md-icon>
-                        </md-button>
-                        <md-button md-menu-item ng-click="crossItem(item)">
-                          <md-icon md-menu-align-target>check</md-icon>
-                        </md-button>
-                        <md-button md-menu-item ng-click="deleteItem(item.id)">
-                          <md-icon>close</md-icon>
-                        </md-button>
-                      </md-menu-content>
-                    </md-menu>
-                  </md-list-item>
-                </md-list>
-              </md-card-content>
+                      <md-button md-menu-item ng-click="crossItem(item)">
+                        <md-icon md-menu-align-target>check</md-icon>
+                      </md-button>
+                      <md-button md-menu-item ng-click="deleteItem(item.id)">
+                        <md-icon>close</md-icon>
+                      </md-button>
+                    </md-menu-content>
+                  </md-menu>
+                </md-list-item>
+              </md-list>
             </md-card>
           </div>
         </div>
@@ -105,7 +106,7 @@
                       <input ng-model="newBoard.name" type="text">
                     </md-input-container>
                     <div>
-                      <md-button ng-click="submit()" class="md-primary md-raised">
+                      <md-button ng-click="addBoard()" class="md-primary md-raised">
                         <md-icon>add</md-icon>
                       </md-button>
                     </div>

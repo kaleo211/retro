@@ -20,10 +20,11 @@ angular.module('board', [])
           }
         }
         $scope.board = localStorageService.get('board');
-
         getItems();
       });
     };
+
+    init();
 
     $scope.updateBoard = function () {
       if ($scope.board != null) {
@@ -33,12 +34,6 @@ angular.module('board', [])
       }
       return "";
     };
-
-    $scope.$on("updateBoard", function () {
-      init();
-    });
-
-    init();
 
     $scope.addItem = function (title, column) {
       var item = {
@@ -106,7 +101,7 @@ angular.module('board', [])
       });
     };
 
-    $scope.submit = function () {
+    $scope.addBoard = function () {
       $http.post('/board', $scope.newBoard).then(
         resp => {
           $scope.board = resp.data;
