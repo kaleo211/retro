@@ -7,6 +7,10 @@ module.exports = function (sequelize, DataTypes) {
       autoIncrement: true
     },
     createdAt: DataTypes.DATE,
+    locked: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    },
     name: DataTypes.STRING
   });
 };

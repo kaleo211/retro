@@ -39,7 +39,7 @@
 
       <md-content>
         <div layout="row">
-          <div layout="column" flex="25">
+          <div layout="column" flex="33">
             <md-card>
               <md-card-title>
                 <md-card-title-text>
@@ -55,22 +55,21 @@
                     </md-input-container>
                   </form>
                 </md-card-content>
-                <md-list-item ng-repeat="item in items.happy">
-                  <span>{{ item.plus }}&nbsp;&nbsp;</span>
-                  <span ng-class="item.done ? 'strikethrough' : ''">{{ item.title }}</span>
+                <md-list-item class="secondary-button-padding" ng-repeat="item in items.happy" ng-click="">
+                  <p ng-class="item.done ? 'strikethrough' : ''">{{ item.plus }}&nbsp;&nbsp;{{ item.title }}</p>
                   <md-menu ng-hide="item.done" class="md-secondary">
                     <md-button class="md-icon-button">
                       <md-icon>more_horiz</md-icon>
                     </md-button>
                     <md-menu-content ng-hide="item.done" width="1">
                       <md-button md-menu-item ng-click="plusOne(item)">
-                        <md-icon>plus_one</md-icon>
+                        <md-icon>thumb_up</md-icon>
                       </md-button>
                       <md-button md-menu-item ng-click="crossItem(item)">
-                        <md-icon md-menu-align-target>check</md-icon>
+                        <md-icon md-menu-align-target>check_box</md-icon>
                       </md-button>
                       <md-button md-menu-item ng-click="deleteItem(item.id)">
-                        <md-icon>close</md-icon>
+                        <md-icon>delete_sweep</md-icon>
                       </md-button>
                     </md-menu-content>
                   </md-menu>
